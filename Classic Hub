@@ -48,6 +48,47 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Felipe201Lua/Autoclic
    end,
 })
 
+local Toggle = Tab:CreateToggle({
+   Name = "Hitbox",
+   CurrentValue = false,
+   Flag = "HitboxToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function()
+loadstring([[
+local P = game:GetService("Players")
+local L = P.LocalPlayer
+local SIZE = Vector3.new(8,8,8)
+
+local function makeAntifling(c)
+    for _, part in ipairs(c:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+            part.Massless = true
+            part.Transparency = 0.7
+        end
+    end
+    local hrp = c:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        hrp.Size = SIZE
+        hrp.Color = Color3.new(1,1,1)
+        hrp.Material = Enum.Material.ForceField
+    end
+end
+
+local function H(p)
+    if p == L then return end
+    local function C(c)
+        makeAntifling(c)
+    end
+    if p.Character then C(p.Character) end
+    p.CharacterAdded:Connect(C)
+end
+
+for _,p in ipairs(P:GetPlayers()) do H(p) end
+P.PlayerAdded:Connect(H)
+]])()
+   end,
+})
+
 local Slider = Tab:CreateSlider({
    Name = "Walkspeed",
    Range = {25,250},
