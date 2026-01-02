@@ -48,64 +48,40 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Felipe201Lua/Autoclic
    end,
 })
 
-local Toggle = Tab:CreateToggle({
-   Name = "Hitbox",
-   CurrentValue = false,
-   Flag = "HitboxToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function()
-
-   end,
-})
-
 Tab:CreateToggle({
-    Name = "Speed",
+    Name = "Admin Speed (SkyWars)",
     CurrentValue = false,
-    Flag = "Speed",
     Callback = function(v)
         speedEnabled = v
     end,
 })
 
 Tab:CreateSlider({
-   Name = "WalkSpeed",
-   Range = {16, 250},
-   Increment = 5,
-   Suffix = " Speed",
-   CurrentValue = 16,
-   Flag = "WalkSpeedSlider",
-   Callback = function(v)
-       currentWalkSpeed = v
-       applyMovement()
-   end,
+    Name = "Speed Power",
+    Range = {20, 200},
+    Increment = 5,
+    CurrentValue = 60,
+    Callback = function(v)
+        speedValue = v
+    end,
 })
 
 Tab:CreateToggle({
-    Name = "Jump",
+    Name = "Admin Jump (SkyWars)",
     CurrentValue = false,
-    Flag = "Jump",
     Callback = function(v)
         jumpEnabled = v
     end,
 })
 
 Tab:CreateSlider({
-   Name = "JumpPower",
-   Range = {50, 250},
-   Increment = 5,
-   Suffix = " Power",
-   CurrentValue = 50,
-   Flag = "JumpPowerSlider",
-   Callback = function(v)
-       currentJumpPower = v
-       applyMovement()
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "Infinite Yeild",
-   Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-   end,
+    Name = "Jump Power",
+    Range = {40, 200},
+    Increment = 5,
+    CurrentValue = 80,
+    Callback = function(v)
+        jumpValue = v
+    end,
 })
 
 local Button = Tab:CreateButton({
