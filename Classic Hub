@@ -38,3 +38,10 @@ local Window = Rayfield:CreateWindow({
 })
 
 local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
+
+Rayfield:Notify({
+   Title = "Loaded!",
+   Content = "Script Loaded!",
+   Duration = 6.5,
+   Image = 4483362458,
+})
