@@ -60,4 +60,18 @@ local Slider = Tab:CreateSlider({
    end,
 })
 
+local Slider = Tab:CreateSlider({
+   Name = "JumpPower",
+   Range = {25,250},
+   Increment = 10,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "JumpPowerToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(v)
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+   end,
+})
+
+
+
 Rayfield:LoadConfiguration()
