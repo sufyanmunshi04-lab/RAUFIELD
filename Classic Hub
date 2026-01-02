@@ -29,7 +29,7 @@ local Window = Rayfield:CreateWindow({
    KeySettings = {
       Title = "Classic Hub Key",
       Subtitle = "Key System",
-      Note = "The Key is {ClassicKey", -- Use this to tell the user how to get a key
+      Note = "The Key is ClassicKey", -- Use this to tell the user how to get a key
       FileName = "ClassicHubKeySystem", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
@@ -47,3 +47,17 @@ local Toggle = Tab:CreateToggle({
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Felipe201Lua/AutoclickV4/main/AutoclickV4.lua"))()
    end,
 })
+
+local Slider = Tab:CreateSlider({
+   Name = "Walkspeed",
+   Range = {25,250},
+   Increment = 10,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "WalkspeedToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(v)
+   game.Players.LocalPlayer.Character.Humanoid.Walkspeed = (v)
+   end,
+})
+
+Rayfield:LoadConfiguration()
