@@ -57,6 +57,15 @@ local Toggle = Tab:CreateToggle({
    end,
 })
 
+Tab:CreateToggle({
+    Name = "Speed",
+    CurrentValue = false,
+    Flag = "Speed",
+    Callback = function(v)
+        speedEnabled = v
+    end,
+})
+
 Tab:CreateSlider({
    Name = "WalkSpeed",
    Range = {16, 250},
@@ -68,6 +77,15 @@ Tab:CreateSlider({
        currentWalkSpeed = v
        applyMovement()
    end,
+})
+
+Tab:CreateToggle({
+    Name = "Jump",
+    CurrentValue = false,
+    Flag = "Jump",
+    Callback = function(v)
+        jumpEnabled = v
+    end,
 })
 
 Tab:CreateSlider({
