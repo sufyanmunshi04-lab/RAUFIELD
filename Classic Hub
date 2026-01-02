@@ -82,8 +82,26 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/
 local Button = Tab:CreateButton({
    Name = "ESP",
    Callback = function()
-local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Exunys-ESP/main/src/ESP.lua"))()
--- ESPLibrary and getgenv().ExunysDeveloperESP is equivalent.
+loadstring([[
+local P=game:GetService("Players")
+local L=P.LocalPlayer
+local function E(p)
+ if p~=L then
+  local function C(c)
+   local h=Instance.new("Highlight")
+   h.FillColor=Color3.fromRGB(255,0,0)
+   h.OutlineColor=Color3.new(1,1,1)
+   h.FillTransparency=.5
+   h.Adornee=c
+   h.Parent=c
+  end
+  if p.Character then C(p.Character) end
+  p.CharacterAdded:Connect(C)
+ end
+end
+for _,p in pairs(P:GetPlayers()) do E(p) end
+P.PlayerAdded:Connect(E)
+]])()
    end,
 })
 
