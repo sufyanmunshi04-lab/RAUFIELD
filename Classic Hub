@@ -56,7 +56,7 @@ local Slider = Tab:CreateSlider({
    CurrentValue = 10,
    Flag = "WalkspeedToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(v)
-   game.Players.LocalPlayer.Character.Humanoid.Walkspeed = v
+game.Players.LocalPlayer.Character.Humanoid.Walkspeed = v
    end,
 })
 
@@ -68,10 +68,23 @@ local Slider = Tab:CreateSlider({
    CurrentValue = 10,
    Flag = "JumpPowerToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(v)
-   game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "Infinite Yeild",
+   Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+   end,
+})
 
+local Button = Tab:CreateButton({
+   Name = "ESP",
+   Callback = function()
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Exunys-ESP/main/src/ESP.lua"))()
+-- ESPLibrary and getgenv().ExunysDeveloperESP is equivalent.
+   end,
+})
 
 Rayfield:LoadConfiguration()
