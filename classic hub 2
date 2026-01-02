@@ -1,0 +1,111 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "CLASSIC HUB",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Classic Hub",
+   LoadingSubtitle = "by elite_g4m3r",
+   ShowText = "Classic Hub", -- for mobile users to unhide rayfield, change if you'd like
+   Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+   DisableRayfieldPrompts = true,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = Classic, -- Create a custom folder for your hub/game
+      FileName = "Classic Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = true,
+   KeySettings = {
+      Title = "Classic Hub Key",
+      Subtitle = "Key System",
+      Note = "The Key is ClassicKey", -- Use this to tell the user how to get a key
+      FileName = "ClassicHubKeySystem", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"ClassicKey"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
+
+local Toggle = Tab:CreateToggle({
+   Name = "Autoclicker",
+   CurrentValue = false,
+   Flag = "AutoclickToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Felipe201Lua/AutoclickV4/main/AutoclickV4.lua"))()
+   end,
+})
+
+Tab:CreateToggle({
+    Name = "Admin Speed (SkyWars)",
+    CurrentValue = false,
+    Callback = function(v)
+        speedEnabled = v
+    end,
+})
+
+Tab:CreateSlider({
+    Name = "Speed Power",
+    Range = {20, 200},
+    Increment = 5,
+    CurrentValue = 60,
+    Callback = function(v)
+        speedValue = v
+    end,
+})
+
+Tab:CreateToggle({
+    Name = "Admin Jump (SkyWars)",
+    CurrentValue = false,
+    Callback = function(v)
+        jumpEnabled = v
+    end,
+})
+
+Tab:CreateSlider({
+    Name = "Jump Power",
+    Range = {40, 200},
+    Increment = 5,
+    CurrentValue = 80,
+    Callback = function(v)
+        jumpValue = v
+    end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "ESP",
+   Callback = function()
+loadstring([[
+local P=game:GetService("Players")
+local L=P.LocalPlayer
+local function E(p)
+ if p~=L then
+  local function C(c)
+   local h=Instance.new("Highlight")
+   h.FillColor=Color3.fromRGB(255,0,0)
+   h.OutlineColor=Color3.new(1,1,1)
+   h.FillTransparency=.5
+   h.Adornee=c
+   h.Parent=c
+  end
+  if p.Character then C(p.Character) end
+  p.CharacterAdded:Connect(C)
+ end
+end
+for _,p in pairs(P:GetPlayers()) do E(p) end
+P.PlayerAdded:Connect(E)
+]])()
+   end,
+})
