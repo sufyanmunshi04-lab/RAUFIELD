@@ -41,7 +41,7 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
 local Button = Tab:CreateButton({
    Name = "ESP [Allows You To See Players From Anywhere] [NOT TOGGLE]",
-   Callback = function(print = ESP)
+   Callback = function()
    -- The function that takes place when the button is pressed
    end,
 })
