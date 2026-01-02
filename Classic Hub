@@ -15,7 +15,7 @@ local Window = Rayfield:CreateWindow({
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = Classic Hub, -- Create a custom folder for your hub/game
+      FolderName = Classic, -- Create a custom folder for your hub/game
       FileName = "Classic Hub"
    },
 
