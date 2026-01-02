@@ -56,7 +56,7 @@ local Slider = Tab:CreateSlider({
    CurrentValue = 10,
    Flag = "WalkspeedToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(v)
-   game.Players.LocalPlayer.Character.Humanoid.Walkspeed = (v)
+   game.Players.LocalPlayer.Character.Humanoid.Walkspeed = v
    end,
 })
 
