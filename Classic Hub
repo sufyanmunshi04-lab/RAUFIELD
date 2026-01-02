@@ -41,7 +41,83 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
 local Button = Tab:CreateButton({
    Name = "ESP [Allows You To See Players From Anywhere] [NOT TOGGLE]",
-   Callback = function()
+   Callback = function(-- Autoclick V4 (NO GUI, NO NOTIFICATIONS)
+-- Made by Felipe
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+local player = Players.LocalPlayer
+
+-- SETTINGS
+local clickSpeedValue = 50
+local autoClickSpeed = 1 / clickSpeedValue
+local autoClickEnabled = true
+
+-- Press shift once
+local shiftPressed = false
+task.spawn(function()
+	task.wait(0.5)
+	if not shiftPressed then
+		VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.LeftShift, false, nil)
+		task.wait(0.1)
+		VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftShift, false, nil)
+		shiftPressed = true
+	end
+end)
+
+-- Autoclick loop
+task.spawn(function()
+	while true do
+		if autoClickEnabled then
+			local character = player.Character
+			if character then
+				local tool = character:FindFirstChildOfClass("Tool")
+				if tool and tool:FindFirstChild("Handle") then
+					tool:Activate()
+				end
+			end
+		end
+		task.wait(autoClickSpeed)
+	end
+end)
+
+-- Keybinds
+UserInputService.InputBegan:Connect(function(input, gp)
+	if gp then return end
+
+	-- Toggle autoclick (F)
+	if input.KeyCode == Enum.KeyCode.F then
+		autoClickEnabled = not autoClickEnabled
+	end
+
+	-- Increase speed (+)
+	if input.KeyCode == Enum.KeyCode.Equals then
+		clickSpeedValue += 5
+		autoClickSpeed = 1 / clickSpeedValue
+	end
+
+	-- Decrease speed (-)
+	if input.KeyCode == Enum.KeyCode.Minus then
+		clickSpeedValue = math.max(1, clickSpeedValue - 5)
+		autoClickSpeed = 1 / clickSpeedValue
+	end
+end)
+
+player.CharacterAdded:Connect(function()
+	autoClickEnabled = true
+end))
    -- The function that takes place when the button is pressed
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Toggle Example",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function()
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
    end,
 })
