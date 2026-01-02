@@ -87,4 +87,3 @@ local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ex
    end,
 })
 
-Rayfield:LoadConfiguration(
